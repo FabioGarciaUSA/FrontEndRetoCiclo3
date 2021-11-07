@@ -3,27 +3,28 @@
 
 <head>
     <title>Tienda videojuegos</title>
+    <meta charset="UTF-8"> 
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/misFuncionesClientes.js"></script>
 </head>
 
 <body>
-    <header> 
+    <header>
         <h1> Bienvenido a la tienda de videojuegos!!!!</h1>
     </header>
-    
-<h2>CLIENTES</h2>
+
+    <h2>CLIENTES</h2>
 
     <nav id="menuprincipal">
         <div>
             <ul>
-                <li><a href="../index.html">Principal</a></li>                
+                <li><a href="../index.html">Principal</a></li>
                 <li><a href="Categorias.html">Categorias</a></li>
                 <li><a href="Juegos.html">Juegos</a></li>
                 <li><a href="Clientes.html">Clientes</a></li>
                 <li><a href="Mensajes.html">Mensajes</a></li>
-                <li><a href="Reservaciones.html">Reservaciones</a></li>                
+                <li><a href="Reservaciones.html">Reservaciones</a></li>
                 <li><a href="Reportes.html">Reportes</a></li>
             </ul>
         </div>
@@ -36,22 +37,22 @@
 
         <input type="hidden" id="clId">
         <label>Nombre</Label>
-        <input class="control" type="text" id="clName" placeholder="Nombre">
+        <input class="control" type="text" id="clName" placeholder="Ej: Juan Garcia" maxlength="250">
         <label>Direccion e-mail</Label>
-        <input class="control" type="text" id="clEmail" placeholder="Direccion e-mail">
+        <input class="control" type="text" id="clEmail" placeholder="Juan@gmail.com" maxlength="45">
         <label>Edad</Label>
-        <input class="control" type="number" id="clAge" placeholder="Edad">
+        <input class="control" type="number" id="clAge" placeholder="1-100" min="1" max="100">
         <label>Contraseña</Label>
-        <input class="control" type="text" id="clPassword" placeholder="Contraseña">
+        <input class="control" type="password" id="clPassword" placeholder="Contraseña" maxlength="45">
 
         <Button id="btnCrearCliente" onclick="saveInfoClient()">Crear cliente</Button>
         <Button id="btnActualizarCliente" onclick="updateInfoClient()">Actualizar</Button>
     </section>
-   
+
     <!--CAJA PARA TRAER DATOS CLIENTES-->
-    <div class="divResultado"> 
+    <div class="divResultado">
         <h4>Contenido tabla clientes</h4>
-        <div  id="resultadoClientes">
+        <div id="resultadoClientes">
 
         </div>
         <Button id="btnResultado" onclick="getInfoClient()">Consultar</Button>

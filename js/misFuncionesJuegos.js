@@ -1,3 +1,4 @@
+////////////        FUNCION PARA TRAER TODO LOS JUEGOS      /////////////////////
 function getInfoGame() {
     $.ajax({
         url: "http://localhost:8080/api/Game/all",
@@ -10,6 +11,8 @@ function getInfoGame() {
         }
     });
 }
+
+////////////        FUNCION PARA DIBUJAR LA TABLA DE JUEGOS      /////////////////////
 function showInfoGame(items) {
     let myTable = "<table>";
     myTable += "<tr>";
@@ -34,8 +37,10 @@ function showInfoGame(items) {
     myTable += "</table>";
     $("#resultadoJuegos").html(myTable);
 }
+
+////////////        FUNCION PARA GUARDAR LOS JUEGOS      /////////////////////
 function saveInfoGame() {
-    if ($("#gameName").val().length == 0 || $("#gameDeveloper").val().length == 0 || $("#gameCatId").val().length == 0
+    if ($("#gameName").val().length == 0 || $("#gameDeveloper").val().length == 0 || $("#gameCatId").val() == null
         || $("#gameMinage").val().length == 0 || $("#gameDescription").val().length == 0) {
         alert("Todos los campos son obligatorios");
     } else {
@@ -61,13 +66,15 @@ function saveInfoGame() {
                 $("#gameDeveloper").val("");
                 $("#gameMinage").val("");
                 $("#gameDescription").val("");
-                $("#gameCatId").val("");
+                $("#gameCatId").val(0);
                 getInfoGame();
                 alert("Se ha GUARDADO el juego en la base de datos")
             }
         });
     }
 }
+
+////////////        FUNCION PARA LLENAR LAS CAJAS ANTES DE EDITAR      /////////////////////
 function preUpdateGame(idJuego) {
     console.log(idJuego);
     $.ajax({
@@ -81,6 +88,7 @@ function preUpdateGame(idJuego) {
             $("#gameName").val(respuesta.name);
             $("#gameDeveloper").val(respuesta.developer);
             $("#gameMinage").val(respuesta.year);
+            $("#gameCatId").val(respuesta.category.id);
             $("#gameDescription").val(respuesta.description);
             $("#resultadoGame").empty();
             $("#btnCrearGame").css('visibility', 'hidden');
@@ -90,8 +98,10 @@ function preUpdateGame(idJuego) {
     });
 
 }
+
+////////////        FUNCION PARA ACTUALIZAR DATOS DE LOS JUEGOS      /////////////////////
 function updateInfoGame() {
-    if ($("#gameName").val().length == 0 || $("#gameDeveloper").val().length == 0 || $("#gameCatId").val().length == 0
+    if ($("#gameName").val().length == 0 || $("#gameDeveloper").val().length == 0
         || $("#gameMinage").val().length == 0 || $("#gameDescription").val().length == 0) {
         alert("Todos los campos son obligatorios");
     } else {
@@ -119,7 +129,7 @@ function updateInfoGame() {
                 $("#gameDeveloper").val("");
                 $("#gameMinage").val("");
                 $("#gameDescription").val("");
-                $("#gameCatId").val("");
+                $("#gameCatId").val(0);
                 $("#btnCrearGame").css('visibility', 'visible');
                 $("#btnActualizarGame").css('visibility', 'hidden');
                 getInfoGame();
@@ -128,6 +138,8 @@ function updateInfoGame() {
         });
     }
 }
+
+////////////        FUNCION PARA BORRAR UN JUEGO      /////////////////////
 function deleteInfoGame(idJuego) {
     $.ajax({
         url: "http://localhost:8080/api/Game/" + idJuego,
@@ -141,6 +153,8 @@ function deleteInfoGame(idJuego) {
         }
     });
 }
+
+////////////        FUNCION PARA TRARE Y LLENAR LA CASILLA CATEGORIA      /////////////////////
 function autoInitCategory() {
     console.log("se esta ejecutando")
     $.ajax({
@@ -159,9 +173,3 @@ function autoInitCategory() {
 
     })
 }
-
-
-/**
-
-    category:{id: +$("#gameCatId").val()},
- */

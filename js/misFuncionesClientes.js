@@ -1,3 +1,4 @@
+////////////        FUNCION PARA TRAER TODOS LOS CLIENTES      /////////////////////
 function getInfoClient() {
     $.ajax({
         url: "http://localhost:8080/api/Client/all",
@@ -10,13 +11,14 @@ function getInfoClient() {
         }
     });
 }
+
+////////////        FUNCION PARA MOSTAR LOS DATOS DE LOS CLIENTES EN LA TABLA     /////////////////////
 function showInfoClient(items) {
     let myTable = "<table>";
     myTable += "<tr>";
     myTable += "<th>Nombre</th>";
     myTable += "<th>Email</th>";
     myTable += "<th>Edad</th>";
-    myTable += "<th>Contraseña</th>";
     myTable += "<th>Editar</th>";
     myTable += "<th>Borrar</th>";
     for (i = 0; i < items.length; i++) {
@@ -24,7 +26,6 @@ function showInfoClient(items) {
         myTable += "<td>" + items[i].name + "</td>";
         myTable += "<td>" + items[i].email + "</td>";
         myTable += "<td>" + items[i].age + "</td>";
-        myTable += "<td>" + items[i].password + "</td>";
         myTable += "<td> <button onclick='preUpdateClient(" + items[i].idClient + ")'>Editar</button>";
         myTable += "<td> <button onclick='deleteInfoClient(" + items[i].idClient + ")'>Borrar</button>";
         myTable += "</tr>";
@@ -32,6 +33,8 @@ function showInfoClient(items) {
     myTable += "</table>";
     $("#resultadoClientes").html(myTable);
 }
+
+////////////        FUNCION PARA GUARDAR LOS DATOS DE UN CLIENTE      /////////////////////
 function saveInfoClient() {
     if ($("#clEmail").val().length == 0 || $("#clPassword").val().length == 0
         || $("#clName").val().length == 0 || $("#clAge").val().length == 0) {
@@ -63,6 +66,8 @@ function saveInfoClient() {
         });
     }
 }
+
+////////////        FUNCION PARA LLENAR LOS DEL CLIENTE ANTES DE ACTUALIZAR      /////////////////////
 function preUpdateClient(idCliente) {
     console.log(idCliente);
     $.ajax({
@@ -84,6 +89,8 @@ function preUpdateClient(idCliente) {
         }
     });
 }
+
+////////////        FUNCION PARA ACTUALIZAR LOS DATOS DE UN CLIENTE      /////////////////////
 function updateInfoClient() {
     if ($("#clEmail").val().length == 0 || $("#clPassword").val().length == 0
         || $("#clName").val().length == 0 || $("#clAge").val().length == 0) {
@@ -93,13 +100,15 @@ function updateInfoClient() {
             idClient: $("#clId").val(),
             email: $("#clEmail").val(),
             password: $("#clPassword").val(),
-            name: $("#clName").val(),
+            name: $("#clName").val(),            
             age: $("#clAge").val(),
+            
         };
         console.log(myData);
         let dataToSend = JSON.stringify(myData);
         $.ajax({
             url: "http://localhost:8080/api/Client/update",
+            //url:"http://155.248.195.219:8080/api/Client/update",
             type: "PUT",
             data: dataToSend,
             contentType: "application/JSON",
@@ -120,6 +129,8 @@ function updateInfoClient() {
     }
 
 }
+
+////////////        FUNCION PARA BORRAR LOS DATOS DE UN CLIENTE      /////////////////////
 function deleteInfoClient(idCliente) {
     $.ajax({
         url: "http://localhost:8080/api/Client/" + idCliente,

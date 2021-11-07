@@ -1,4 +1,4 @@
-
+////////////        FUNCION PARA TRAER TODAS LAS CATEGORIAS      /////////////////////
 function getInfoCategory() {
     $.ajax({
         url: "http://localhost:8080/api/Category/all",
@@ -11,6 +11,8 @@ function getInfoCategory() {
         }
     });
 }
+
+////////////        FUNCION PARA PINTAR LA TABLA CON LAS CATEGORIAS      /////////////////////
 function showInfoCategory(items) {
     let myTable = "<table>";
     myTable += "<tr>";
@@ -29,6 +31,8 @@ function showInfoCategory(items) {
     myTable += "</table>";
     $("#resultadoCategoria").html(myTable);
 }
+
+////////////        FUNCION PARA GUARDAR UNA CATEGORIA       /////////////////////
 function saveInfoCategory() {
     if ($("#catName").val().length == 0 || $("#catDescription").val().length == 0) {
         alert("Todos los campos son obligatorios");
@@ -55,6 +59,8 @@ function saveInfoCategory() {
         });
     }
 }
+
+////////////        FUNCION PARA LLENAR LA CAJAS ANTES DE ACTUALIZAR      /////////////////////
 function preUpdateCategory(idCat) {
     console.log(idCat);
     $.ajax({
@@ -75,6 +81,8 @@ function preUpdateCategory(idCat) {
     });
 
 }
+
+////////////        FUNCION PARA ACTUALIZAR LOS DATOS DE UNA CATEGORIA      /////////////////////
 function updateInfoCategory() {
     if ($("#catName").val().length == 0 || $("#catDescription").val().length == 0) {
         alert("Todos los campos son obligatorios");
@@ -88,6 +96,7 @@ function updateInfoCategory() {
         let dataToSend = JSON.stringify(myData);
         $.ajax({
             url: "http://localhost:8080/api/Category/update",
+            //url:"http://155.248.195.219:8080/api/Category/update",
             type: "PUT",
             data: dataToSend,
             contentType: "application/JSON",
@@ -106,6 +115,8 @@ function updateInfoCategory() {
     }
 
 }
+
+////////////        FUNCION PARA BORRAR UNA CATEGORIA      /////////////////////
 function deleteInfoCategory(idCat) {
     $.ajax({
         url: "http://localhost:8080/api/Category/" + idCat,
